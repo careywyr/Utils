@@ -1,7 +1,5 @@
 package com.carey.utils.sm3util;
 
-import org.bouncycastle.util.encoders.Hex;
-
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -34,7 +32,7 @@ public class File2SM3 {
             SM3Digest sm3 = new SM3Digest();
             sm3.update(bstr, 0, bstr.length);
             sm3.doFinal(md, 0);
-            return new String(Hex.encode(md));
+            return new String(bytesToHexString(md));
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
@@ -47,5 +45,21 @@ public class File2SM3 {
             }
         }
         return null;
+    }
+
+    private static String bytesToHexString(byte[] src){
+        StringBuilder stringBuilder = new StringBuilder("");
+        if (src == null || src.length <= 0) {
+            return null;
+        }
+        for (int i = 0; i < src.length; i++) {
+            int v = src[i] & 0xFF;
+            String hv = Integer.toHexString(v);
+            if (hv.length() < 2) {
+                stringBuilder.append(0);
+            }
+            stringBuilder.append(hv);
+        }
+        return stringBuilder.toString();
     }
 }
