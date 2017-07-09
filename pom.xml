@@ -64,6 +64,12 @@
             <artifactId>itextpdf</artifactId>
             <version>5.5.11</version>
         </dependency>
+        <dependency>
+            <groupId>org.icepdf.os</groupId>
+            <artifactId>icepdf-core</artifactId>
+            <version>6.1.2</version>
+        </dependency>
+
     </dependencies>
 
 </project>

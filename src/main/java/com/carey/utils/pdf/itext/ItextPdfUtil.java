@@ -13,7 +13,7 @@ import java.util.Date;
 /**
  * Created by Carey on 2017/7/7.
  */
-public class ItextPdf {
+public class ItextPdfUtil {
     public static void main(String[] args) {
         try {
             SimpleDateFormat sdf = new SimpleDateFormat("YYYYMMddHHmmss-SSS");
