@@ -30,10 +30,14 @@ public class PDFToImage {
         File file = new File(filePath);
         PDDocument document = PDDocument.load(file);
         PDFRenderer renderer = new PDFRenderer(document);
-        System.out.println(new Date());
-        BufferedImage image = renderer.renderImage(2);
-        System.out.println(new Date());
-        ImageIO.write(image, "JPEG", new File("D:/myimage.jpg"));
+        for (int i = 0; i < 10; i++)
+        {
+
+            BufferedImage image = renderer.renderImage(i);
+            String name = String.valueOf(i);
+            String fileName = "d:/"+name+".jpg";
+            ImageIO.write(image, "JPEG", new File(fileName));
+        }
         System.out.println(new Date());
         System.out.println("success");
 

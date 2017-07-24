@@ -18,11 +18,11 @@ public class ItextPdfUtil {
         try {
             SimpleDateFormat sdf = new SimpleDateFormat("YYYYMMddHHmmss-SSS");
             System.out.println(sdf.format(new Date()));
-            FileInputStream fis = new FileInputStream("d:\\test1.pdf");
+            FileInputStream fis = new FileInputStream("d:\\test.pdf");
             int pages = getTotalPages(fis);
             for (int i = 0; i < pages; i++) {
-                String out = "d:\\output"+(i+1)+".pdf";
-                splitPDF(new FileInputStream("d:\\test1.pdf"), new FileOutputStream(out), i+1, i+1);
+                String out = "d:\\output_"+(i+1)+".pdf";
+                splitPDF(new FileInputStream("d:\\test.pdf"), new FileOutputStream(out), i+1, i+1);
             }
 
 //            splitPDF(new FileInputStream("d:\\test1.pdf"),

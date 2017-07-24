@@ -47,13 +47,11 @@ public class IcePdfMain
         document = new Document();
         document.setFile(filepath);
         // maxPages = document.getPageTree().getNumberOfPages();
-        System.out.println(sdf.format(new Date()));
 
         BufferedImage img = (BufferedImage) document.getPageImage(0,
             GraphicsRenderingHints.SCREEN, Page.BOUNDARY_CROPBOX, rotation,
             zoom);
 
-        System.out.println(sdf.format(new Date()));
 
         Iterator iter = ImageIO.getImageWritersBySuffix(FILETYPE_JPG);
         ImageWriter writer = (ImageWriter) iter.next();
@@ -71,7 +69,12 @@ public class IcePdfMain
         System.out.println(new Date());
         try
         {
-            tranfer("d:/test.pdf","d:1.jpg",1);
+            for (int i = 0; i < 10; i++)
+            {
+                String name = String.valueOf(i);
+                String fileName = "d:/"+name+".jpg";
+                tranfer("d:/test.pdf",fileName,1);
+            }
         }
         catch (PDFException e)
         {
