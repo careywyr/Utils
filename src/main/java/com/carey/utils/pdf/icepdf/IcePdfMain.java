@@ -69,22 +69,14 @@ public class IcePdfMain
         System.out.println(new Date());
         try
         {
-            for (int i = 0; i < 10; i++)
+//                String fileName = "d:/ice/"+"test.jpg";
+//                tranfer("d:/output_34.pdf",fileName,1);
+            for (int i = 1; i < 48; i++)
             {
-                String name = String.valueOf(i);
-                String fileName = "d:/"+name+".jpg";
-                tranfer("d:/test.pdf",fileName,1);
+                pageImage("d:/EpolicyGetPDFFileServletPort.pdf",i);
             }
         }
-        catch (PDFException e)
-        {
-            e.printStackTrace();
-        }
-        catch (PDFSecurityException e)
-        {
-            e.printStackTrace();
-        }
-        catch (IOException e)
+        catch (Exception e)
         {
             e.printStackTrace();
         }
@@ -106,7 +98,7 @@ public class IcePdfMain
                 if (image != null) {
                     rendImage = (BufferedImage) image;
                     System.out.println("Capture page " + pageNumber + " image " + count);
-                    File file = new File("imageCapture_" + pageNumber + "_" + count + ".jpg");
+                    File file = new File("d:/ice/imageCapture_" + pageNumber + "_" + count + ".jpg");
                     ImageIO.write(rendImage, "jpg", file);
                     image.flush();
                 }
