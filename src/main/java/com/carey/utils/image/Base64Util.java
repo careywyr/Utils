@@ -13,6 +13,9 @@ import java.util.regex.Pattern;
  */
 public class Base64Util
 {
+
+    private static final Pattern NOBLANK = Pattern.compile("\\s*|\t|\r|\n");
+
     /**
      * 将文件转化为字节数组字符串，并对其进行Base64编码处理
      * @param imgFile
@@ -44,16 +47,17 @@ public class Base64Util
      */
     public static boolean generateImage(String imgStr, String savedImagePath) {
         // 文件字节数组字符串数据为空
-        if (imgStr == null)
-            return false;
+        if (imgStr == null){
+            return false;}
         BASE64Decoder decoder = new BASE64Decoder();
         try {
             // Base64解码
             byte[] b = decoder.decodeBuffer(imgStr);
             for (int i = 0; i < b.length; ++i) {
                 {// 调整异常数据
-                    if (b[i] < 0)
+                    if (b[i] < 0){
                         b[i] += 256;
+                    }
                 }
             }
             // 生成文件
@@ -68,21 +72,50 @@ public class Base64Util
         }
     }
 
+    // 加密
+    public static String getBase64(String str) {
+        byte[] b = null;
+        String s = null;
+        try {
+            b = str.getBytes("utf-8");
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
+        if (b != null) {
+            s = new BASE64Encoder().encode(b);
+        }
+        return s;
+    }
+
+    // 解密
+    public static String getFromBase64(String s) {
+        byte[] b = null;
+        String result = null;
+        if (s != null) {
+            BASE64Decoder decoder = new BASE64Decoder();
+            try {
+                b = decoder.decodeBuffer(s);
+                result = new String(b, "utf-8");
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        return result;
+    }
+
     public static void main(String[] args)
     {
         String base64  = getImageStr("d:/test.pdf");
-        Pattern p = Pattern.compile("\\s*|\t|\r|\n");
-        Matcher m = p.matcher(base64);
-        String a = m.replaceAll("");
-        System.out.print(a);
+        Matcher matcher = NOBLANK.matcher(base64);
+        String result = matcher.replaceAll("");
+        System.out.print(result);
     }
 
     public static String replaceBlank(String str) {
         String dest = "";
         if (str!=null) {
-            Pattern p = Pattern.compile("\\s*|\t|\r|\n");
-            Matcher m = p.matcher(str);
-            dest = m.replaceAll("");
+            Matcher matcher = NOBLANK.matcher(str);
+            dest = matcher.replaceAll("");
         }
         return dest;
     }
